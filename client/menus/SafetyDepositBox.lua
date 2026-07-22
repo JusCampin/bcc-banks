@@ -129,21 +129,21 @@ function OpenCreateSDBPage(bank, ParentPage, selectedPayWith)
     -- Choose payment currency
     local payWith = selectedPayWith or 'cash' -- 'cash' or 'gold'
     CreateSDBPage:RegisterElement('textdisplay', {
-        value = 'Select payment:',
+        value = _U('sdb_select_payment'),
         slot  = 'content'
     })
     CreateSDBPage:RegisterElement('button', {
-        label = 'Pay With Cash',
+        label = _U('sdb_pay_cash'),
         style = {}
     }, function()
-        Notify('Payment set to Cash', 1500)
+        Notify(_U('sdb_payment_cash_selected'), 1500)
         OpenCreateSDBPage(bank, ParentPage, 'cash')
     end)
     CreateSDBPage:RegisterElement('button', {
-        label = 'Pay With Gold',
+        label = _U('sdb_pay_gold'),
         style = {}
     }, function()
-        Notify('Payment set to Gold', 1500)
+        Notify(_U('sdb_payment_gold_selected'), 1500)
         OpenCreateSDBPage(bank, ParentPage, 'gold')
     end)
     
@@ -192,10 +192,12 @@ function OpenCreateSDBPage(bank, ParentPage, selectedPayWith)
         Notify(_U("size_selected_notify", _U("size_large_button")), 2000)
     end)
     CreateSDBPage:RegisterElement('line', {
+        slot  = 'footer',
         style = {}
     })
     CreateSDBPage:RegisterElement('button', {
         label = _U("create_box_button"),
+        slot  = 'footer',
         style = {}
     }, function()
         if not sdbName or sdbName == '' then
@@ -216,10 +218,6 @@ function OpenCreateSDBPage(bank, ParentPage, selectedPayWith)
         Notify(_U("box_created_notify", sdbName), 3000)
         OpenSDBListPage(bank, ParentPage)
     end)
-    CreateSDBPage:RegisterElement('line', {
-        slot  = 'footer',
-        style = {}
-    })
     CreateSDBPage:RegisterElement('button', {
         label = _U("back_button"),
         slot  = 'footer',
